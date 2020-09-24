@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ROT Encoder</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container mx-auto" style="width: 600px">
+    <div class="jumbotron">
+      <h1 class="display-4">ROT Encoder</h1>
+      <h4 class="lead">Enter a string and a rotation (n). The encoder will shift each charater by n characters in the alphabet.</h4>
+    </div>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <form action="{% url 'encoder:submit' %}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="string">String</label>
+        <input type="text" class="form-control" name="string" id="string" placeholder="Hello World" required>
+      </div>
+      <div class="form-group">
+        <label for="rotation">Rotation</label>
+        <input type="number" class="form-control" name="rotation" id="rotation" placeholder="13" min="1" max="25" required >
+      </div>
+      <button type="submit" class="btn btn-primary">Encode</button>
+    </form>
+    {% if result %}
+      <h4>Original String / Rotation</h4>
+      <p>{{ original_string }} / {{ rotation}}</p>
+
+      <h4>Encoded String</h4>
+      <p>{{ encoded_string }}</p>
+
+      <a class="btn btn-primary" href="{% url 'encoder:index' %}">Start Over</a>
+    {% endif %}
+  </div>
+</body>
+</html>
