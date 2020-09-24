@@ -8,6 +8,7 @@
 1. Run `pip install -r requirements.txt` to install dependencies
 1. Move into rotencode directory `cd rotencoder`
 1. Run  `python manage.py runserver` to start the development server
+    -  You can ignore the migrations warning from django
 1. Navigate to http://127.0.0.1:8000/encoder
 
 
